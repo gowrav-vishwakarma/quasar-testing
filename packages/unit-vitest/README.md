@@ -175,6 +175,28 @@ describe('store examples', () => {
 });
 ```
 
+#### Using i18n
+To be able to use $t in your templates add the following code in your test/vitest/setup-file.ts
+
+```ts
+// This file will be run before each test file
+
+import { createI18n } from 'vue-i18n';
+import messages from 'src/i18n';
+import { config } from '@vue/test-utils';
+
+const i18n = createI18n({
+  locale: 'en-US',
+  legacy: false,
+  messages,
+});
+
+config.global.mocks = {
+  $t: (msg: string) => i18n.global.t(msg),
+};
+
+```
+
 ### Testing the AE
 
 ```sh
